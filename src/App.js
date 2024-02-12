@@ -1,24 +1,45 @@
-import logo from './logo.svg';
 import './App.css';
+import Login from "./components/login";
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from "./components/home";
+import Logout from "./components/logout"
+import CandidateForm from './Form/CandidateForm';
+import { useEffect } from 'react';
+import { gapi } from "gapi-script";
+
+const clientId = "http://183169153771-14f0ptr2pute4l72qr4hphfhua6rll6h.apps.googleusercontent.com";
 
 function App() {
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: ""
+      })
+    };
+    gapi.load('client:auth2', start);
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <div>
+          <nav>
+            <Link className='navbar' to="/">Home</Link>
+            {/* <Link to="/candidate/new">Add Candidate</Link> */}
+          </nav>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path='/candidate/new' element={<CandidateForm />} />
+          </Routes>
+        </div>
+      </Router >
+      {/* <Home/>
+      <Login/>
+      <Logout/> */}
+    </div >
   );
 }
 

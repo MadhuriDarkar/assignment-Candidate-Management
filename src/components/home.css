@@ -1,0 +1,78 @@
+.home-container {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    /* Adjust height as needed */
+}
+
+.left-section {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    position: relative;
+}
+
+.listHeader {
+    background-color: rgb(118, 131, 161);
+    border-radius: 5px;
+    width: 80%;
+    margin-left: 10%;
+  
+}
+
+.add-button {
+    position: absolute;
+    left: 1%;
+    top: 1%;
+    width: 10%;
+    background-color: rgb(99, 143, 244);
+    box-sizing: border-box;
+    border: 1px solid rgb(73, 125, 248);
+    box-shadow: 0 0 10px rgb(94, 126, 199);
+    height: 4.5%;
+    cursor: pointer;
+}
+
+.card {
+    box-sizing: border-box;
+    border: 1px solid rgb(6, 23, 62);
+    box-shadow: 0 0 10px rgb(65, 77, 105);
+    height: 40px;
+    font-size: 80%;
+    width: 50%;
+    margin-left: 25%;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+.right-section {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.detailsDisplay {
+    box-sizing: border-box;
+    border: 1px solid rgb(6, 23, 62);
+    box-shadow: 0 0 10px rgb(65, 77, 105);
+    height: auto;
+    font-size: 80%;
+    width: auto;
+    margin-left: 10%;
+    border-radius: 10px;
+    margin-right: 10%;
+
+}
+
+.left-section {
+    background-color: #f0f0f0;
+    /* Adjust background color as needed */
+}
+
+.right-section {
+    background-color: #e0e0e0;
+    /* Adjust background color as needed */
+}
