@@ -2,6 +2,7 @@ import GoogleLogin from "react-google-login";
 import './login.css';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+//import { GoogleLogout } from "react-google-login";
 
 
 const clientId = "183169153771-p39cdoip4ak57f8u6jdfe3mjiaj2k5cs.apps.googleusercontent.com";
@@ -45,11 +46,12 @@ function Login() {
     return (
         <div className="Login-container">
             <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} name="loginForm">
                 <div className="loginform">
                     <div>
                         <label htmlFor="username">username</label>
                         <input
+                            name="name"
                             type="text"
                             id="username"
                             value={username}
@@ -60,6 +62,7 @@ function Login() {
                     <div>
                         <label htmlFor="password">password</label>
                         <input
+                            name="pwd"
                             type="password"
                             id="password"
                             value={password}
@@ -71,12 +74,10 @@ function Login() {
 
                 <button type="submit" className="login-button" onClick={handleSubmit}>
                     login
-                </button>
-
-
-            </form>
-
-            <GoogleLogin
+                </button><br/>
+                other signin option
+                <br/>
+                <GoogleLogin
                 clientId={clientId}
                 buttonText="login"
                 onSuccess={onSuccess}
@@ -85,6 +86,15 @@ function Login() {
                 isSignedIn={true}
                 onClick={handleGoogleLogin}
             />
+             {/* <GoogleLogout
+              clientId={clientId}
+              buttonText="logout"
+              onLogoutSuccess={onSuccess}
+            /> */}
+
+            </form>
+
+           
 
         </div>
     )

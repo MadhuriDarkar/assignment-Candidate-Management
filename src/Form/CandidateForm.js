@@ -18,7 +18,7 @@ const CandidateForm = () => {
       [{
         institution: '',
         graduation: '',
-      },],
+      }],
     skills: [{
       skill: '',
       experienceInMonths: ''
@@ -33,6 +33,7 @@ const CandidateForm = () => {
       }
     ]
   });
+
 
   const handleChange = (step, field, value) => {
     if (step === 'personalDetails') {
@@ -61,6 +62,7 @@ const CandidateForm = () => {
 
   const nextStep = () => {
     setCurrentStep(prevStep => prevStep + 1);
+    {console.log(formData, "personal details data of candidate")}
   };
 
   const prevStep = () => {

@@ -3,6 +3,7 @@ import { useState } from "react";
 
 
 const PersonalDetailsForm = ({ formData, handleChange, nextStep }) => {
+    
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         handleChange('personalDetails', name, value);

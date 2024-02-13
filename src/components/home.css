@@ -1,16 +1,56 @@
 .home-container {
     display: flex;
-    justify-content: space-between;
-    height: 100vh;
-    /* Adjust height as needed */
+    /* justify-content: space-between; */
+    height: 100%;
+    /* width: 100vh; */
+    flex-direction: column;
 }
+.navbar{
+    height: 3rem;
+    display: flex;
+    width: 100%;
+}
+.diaplay{
+    text-align: center;
+    margin-left: 1%;
 
+
+}
+.googleLogoutButton{
+ /* margin-left: 80%; */
+ justify-content: flex-end;
+ position: absolute;
+    right: 1%;
+    top: 0%;
+}
+.homelink{
+    position: absolute;
+    top: 1%;
+    left: 1%;
+}
+.sectionHolder{
+        /* height: 90%; */
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 90vh;
+}
 .left-section {
     width: 50%;
     padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
     position: relative;
+    height: 100%;
+}
+.right-section {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    /* margin-left: 50%; */
+    /* margin-top: 0%; */
+    height: 100%;
 }
 
 .listHeader {
@@ -47,12 +87,7 @@
 
 }
 
-.right-section {
-    width: 50%;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow-y: auto;
-}
+
 
 .detailsDisplay {
     box-sizing: border-box;
@@ -75,4 +110,15 @@
 .right-section {
     background-color: #e0e0e0;
     /* Adjust background color as needed */
+}
+table{
+    text-align: left;
+}
+.column1{
+    vertical-align: top;
+    border: 1px solid;
+}
+.column2{
+padding-left: 10px;
+border: 1px solid;
 }

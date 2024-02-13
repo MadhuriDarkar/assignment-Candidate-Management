@@ -19,6 +19,7 @@ const ExperienceForm = ({ formData, handleChange, handleSubmit, prevStep }) => {
         updatedExperience.splice(index, 1);
         handleChange('experience', updatedExperience);
     };
+    
 
     return (
         <div className='expFrom'>

@@ -2,8 +2,13 @@ import React from 'react';
 import './home.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+//import CandidateForm from '../Form/CandidateForm';
+import AddCandidateForm from '../Form/AddCandidateForm';
+//import StepContex from '../StepContext';
 
 
+
+//const clientId = "183169153771-p39cdoip4ak57f8u6jdfe3mjiaj2k5cs.apps.googleusercontent.com";
 const Home = () => {
 
     const [candidates, setCandidates] = useState([]);
@@ -11,7 +16,7 @@ const Home = () => {
     const [editedCandidate, setEditedCandidate] = useState(null);
     const [editing, setEditing] = useState(false);
 
-
+  
     useEffect(() => {
         // Function to fetch data of the candidate from the API
         const fetchData = async () => {
@@ -87,44 +92,52 @@ const Home = () => {
 
     const renderNestedObjects = (obj) => {
         return (
-            <table>
+            <table className='table'>
                 <tbody>
                     {Object.entries(obj).map(([key, value]) => (
                         <tr key={key}>
-                            <td>{key}</td>
-                            <td>{typeof value === 'object' ? renderNestedObjects(value) : value}</td>
+                            <td className='column1'>{key}</td>
+                            <td className='column2'>{typeof value === 'object' ? renderNestedObjects(value) : value}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
         );
     };
-
+    const [addClicked, setAddClicked] = useState(false);
     const handleAddCandidate = () => {
-        window.location.href = '/candidate/new';
+        // window.location.href = '/candidate/new'; 
+        setAddClicked(true);
     }
 
     return (
         <div className="home-container">
-
+        
+           <div className='sectionHolder'>
             <div className="left-section">
                 
                 <h2 className='listHeader'>List of Candidates</h2>
+              
                 {candidates.map(candidate => (
                     <div key={candidate.id} className="card" onClick={() => handleCardClick(candidate.id)}>
                         <h3>{candidate.name}</h3>
 
                     </div>
                 ))}
+         
                 
                 <button className='add-button' onClick={handleAddCandidate}>Add</button>
               
             </div>
             <div className="right-section">
-              
-                <h2>Selected Candidate Details</h2>
-                <button onClick={handleDelete}>Delete</button> {/* Add delete button */}
-                <button onClick={handleEdit}>Edit</button>
+                {/* <StepContex> */}
+                {addClicked ?
+                   ( <AddCandidateForm/>) :(
+                
+                <>
+                   <h2>Selected Candidate Details</h2>
+                    <button onClick={handleEdit}>Edit</button>
+                  <button onClick={handleDelete}>Delete</button> 
                  {selectedCandidate && (
                     <div>
                         {editing ? (
@@ -141,7 +154,10 @@ const Home = () => {
                             </div>
                         )}
                     </div>
-                )}
+                )}</>
+                )  }
+                {/* </StepContex> */}
+            </div>
             </div>
         </div>
     );
