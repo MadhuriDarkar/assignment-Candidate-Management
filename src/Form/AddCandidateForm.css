@@ -26,8 +26,9 @@ width: 50%;
 padding: 20px;
 box-sizing: border-box;
 overflow-y: auto;
-/* margin-left: 50%; */
-/* margin-top: 0%; */
 height: 100%;
 position: relative;
+}
+.inputFieldPic{
+    padding-left: 20px 20px;
 }

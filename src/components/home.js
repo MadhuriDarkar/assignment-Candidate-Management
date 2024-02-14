@@ -3,16 +3,12 @@ import './home.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-
-
-
 const Home = () => {
 
     const [candidates, setCandidates] = useState([]);
     const [selectedCandidate, setSelectedCandidate] = useState(null);
     const [editedCandidate, setEditedCandidate] = useState(null);
     const [editing, setEditing] = useState(false);
-
 
     useEffect(() => {
         // Function to fetch data of the candidate from the API
@@ -26,16 +22,12 @@ const Home = () => {
             }
         };
         fetchData();
-
-
         return () => {
-            // Cancel the request here if needed
         };
     }, []); // Empty dependency array ensures that the effect runs only once
 
     const handleCardClick = (id) => {
-        // You can perform any action here when a card is clicked, such as navigating to a candidate's details page
-        console.log('Clicked on candidate with ID:', id);
+         console.log('Clicked on candidate with ID:', id);
         const candidate = candidates.find(candidate => candidate.id === id);
         setSelectedCandidate(candidate);
         setEditedCandidate(candidate);
@@ -45,22 +37,6 @@ const Home = () => {
     const handleEdit = () => {
         setEditing(true);
     }
-
-    // const renderNestedData = (obj) => {
-    //     return (
-    //         <div className='table'>
-    //             <form>
-    //                 {Object.entries(obj).map(([key, value]) => (
-    //                     <label key={key}>
-    //                         {/* <td className='column1'>{key}</td> */}
-    //                         <input className='column2'>{typeof value === 'object' ? renderNestedData(value) : value}</input>
-    //                     </label>
-    //                 ))}
-    //             </form>
-    //         </div>
-    //     );
-    // };
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setEditedCandidate(prevState => ({
@@ -97,12 +73,10 @@ const Home = () => {
                 })
                 .catch(error => {
                     console.error('Error deleting candidate:', error);
-                });
+                }
+            );
         }
     };
-
-
-
     const renderNestedObjects = (obj) => {
         return (
             <table className='table'>
@@ -117,11 +91,8 @@ const Home = () => {
             </table>
         );
     };
-
     const handleAddCandidate = () => {
         window.location.href = '/candidate/new';
-     
-
     }
 
     return (
@@ -133,7 +104,6 @@ const Home = () => {
                     {candidates.map(candidate => (
                         <div key={candidate.id} className="card" onClick={() => handleCardClick(candidate.id)}>
                             <h3>{candidate.name}</h3>
-
                         </div>
                     ))}
                     <button className='add-button' onClick={handleAddCandidate}>Add</button>
@@ -153,13 +123,11 @@ const Home = () => {
                                     {editing ? (
                                         <div>
                                             <input type="text" name="name" value={editedCandidate.name} onChange={handleInputChange} />
-                                            {/* {renderNestedData(selectedCandidate)} */}
                                             <button onClick={handleSave}>Save</button>
                                         </div>
                                     ) : (
                                         <div>
                                             {renderNestedObjects(selectedCandidate)}
-
                                         </div>
                                     )}
                                 </div>

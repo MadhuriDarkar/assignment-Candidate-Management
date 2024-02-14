@@ -1,18 +1,14 @@
+import React from "react";
 import GoogleLogin from "react-google-login";
 import './login.css';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-//import { GoogleLogout } from "react-google-login";
 
-
-const clientId = "183169153771-p39cdoip4ak57f8u6jdfe3mjiaj2k5cs.apps.googleusercontent.com";
-
-
+const clientId = process.env.REACT_APP_appClientID;
 function Login() {
 
     const navigate = useNavigate();
     const onSuccess = (res) => {
-        console.log('logged in successfully', res.profileObj);
         navigate('/');
     }
     const onFailure = (res) => {
@@ -31,21 +27,19 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Username:', username);
-        console.log('Password:', password);
         navigate('/');
+
+        
     };
 
     const handleGoogleLogin = () => {
-
-        console.log('User clicked on Google Sign-In button');
-
         navigate('/');
     };
 
     return (
         <div className="Login-container">
             <h2>Login</h2>
+           { console.log(process.env.REACT_APP_TEMP,"env data")}
             <form onSubmit={handleSubmit} name="loginForm">
                 <div className="loginform">
                     <div>
@@ -86,16 +80,7 @@ function Login() {
                 isSignedIn={true}
                 onClick={handleGoogleLogin}
             />
-             {/* <GoogleLogout
-              clientId={clientId}
-              buttonText="logout"
-              onLogoutSuccess={onSuccess}
-            /> */}
-
             </form>
-
-           
-
         </div>
     )
 }

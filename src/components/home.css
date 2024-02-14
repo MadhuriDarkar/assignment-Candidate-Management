@@ -1,40 +1,39 @@
 .home-container {
     display: flex;
-    /* justify-content: space-between; */
     height: 100%;
-    /* width: 100vh; */
     flex-direction: column;
 }
-.navbar{
+
+.navbar {
     height: 3rem;
     display: flex;
     width: 100%;
 }
-.diaplay{
+
+.diaplay {
     text-align: center;
-    margin-left: 1%;
+    margin-left: 1%;}
 
-
-}
-.googleLogoutButton{
- /* margin-left: 80%; */
- justify-content: flex-end;
- position: absolute;
+.googleLogoutButton {
+       justify-content: flex-end;
+    position: absolute;
     right: 1%;
     top: 0%;
 }
-.homelink{
+
+.homelink {
     position: absolute;
     top: 1%;
     left: 1%;
 }
-.sectionHolder{
-        /* height: 90%; */
-        position: relative;
-        display: flex;
-        width: 100%;
-        height: 90vh;
+
+.sectionHolder {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 90vh;
 }
+
 .left-section {
     width: 50%;
     padding: 20px;
@@ -43,13 +42,12 @@
     position: relative;
     height: 100%;
 }
+
 .right-section {
     width: 50%;
     padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
-    /* margin-left: 50%; */
-    /* margin-top: 0%; */
     height: 100%;
     position: relative;
 }
@@ -59,7 +57,7 @@
     border-radius: 5px;
     width: 80%;
     margin-left: 10%;
-  
+
 }
 
 .add-button {
@@ -74,7 +72,8 @@
     height: 4.5%;
     cursor: pointer;
 }
-.selectedData{
+
+.selectedData {
     margin-top: 3%;
 }
 
@@ -90,9 +89,6 @@
     cursor: pointer;
 
 }
-
-
-
 .detailsDisplay {
     box-sizing: border-box;
     border: 1px solid rgb(6, 23, 62);
@@ -103,25 +99,16 @@
     margin-left: 10%;
     border-radius: 10px;
     margin-right: 10%;
-
 }
 
 .left-section {
     background-color: #f0f0f0;
-    /* Adjust background color as needed */
 }
 
 .right-section {
     background-color: #e0e0e0;
-    /* Adjust background color as needed */
 }
-/* .header{
-   position: fixed;
-    background-color:  black;
-    height: 4rem;
-   
-} */
-.selectedList{
+.selectedList {
     color: white;
     text-align: center;
     position: fixed;
@@ -131,31 +118,34 @@
     background-color: #6a6969;
     left: 49.9%;
 }
-.btn{
+
+.btn {
     display: flex;
     position: fixed;
     top: 9.9%;
     left: 53%;
-   
 }
-.editButton{
+
+.editButton {
     position: absolute;
     right: 0;
 }
 
-.deleteButton{
-
+.deleteButton {
     position: absolute;
     left: 50%;
 }
-table{
+
+table {
     text-align: left;
 }
-.column1{
+
+.column1 {
     vertical-align: top;
     border: 1px solid;
 }
-.column2{
-padding-left: 10px;
-border: 1px solid;
+
+.column2 {
+    padding-left: 10px;
+    border: 1px solid;
 }

@@ -7,9 +7,7 @@ import AddCandidateForm from './Form/AddCandidateForm';
 import { useEffect } from 'react';
 import { gapi } from "gapi-script";
 
-
-const clientId = "http://183169153771-14f0ptr2pute4l72qr4hphfhua6rll6h.apps.googleusercontent.com";
-
+const clientId = process.env.REACT_APP_appClientID;
 function App() {
   useEffect(() => {
     function start() {
@@ -20,36 +18,31 @@ function App() {
     };
     gapi.load('client:auth2', start);
   });
-  const onSuccess = (res) =>{
+  const onSuccess = (res) => {
     console.log("logged out successfully");
     window.location.href = '/login';
-}
+  }
 
   return (
     <div className="App">
       <Router>
         <div>
-        <div className='navbar row'>
-        <Link  to="/">Home</Link> 
-        <GoogleLogout
-            className='googleLogoutButton'
+          <div className='navbar row'>
+            <Link to="/">Home</Link>
+            <GoogleLogout
+              className='googleLogoutButton'
               clientId={clientId}
               buttonText="logout"
               onLogoutSuccess={onSuccess}
-            />           
-            
-           </div>
+            />
+          </div>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            {/* <Route path="/logout" element={<Logout />} /> */}
             <Route path='/candidate/new' element={<AddCandidateForm />} />
           </Routes>
         </div>
       </Router >
-      {/* <Home/>
-      <Login/>
-      <Logout/> */}
     </div >
   );
 }

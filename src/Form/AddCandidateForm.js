@@ -8,16 +8,47 @@ const AddCandidateForm = () => {
 
     const [candidates, setCandidates] = useState([]);
     const [curStep, setStep] = useState(1);
-    const [userData, setUserData] = useState({});
+    const [userData, setUserData] = useState({
+        education: [{}],
+        skills: [{}],
+        experience: [{}]
+    });
     const [finalData, setFinalData] = useState({});
-    
 
-    // const [clickCount, setClickCount]= useState(0);
+    const handleInputChange = (section, index, name, value) => {
+        const updatedData = { ...userData };
+        updatedData[section][index][name] = value;
+        setUserData(updatedData);
+    };
 
-    // const addcount =() =>{
-    //  setClickCount(clickCount +1);
-    //  console.log(clickCount,"time click add button"); 
-    // };
+    const handleChange = (section,e, label, index) => {
+        const { value } = e.target;
+        handleInputChange(section, index, label, value);
+    };
+
+    const addEntry = (section) => {
+
+        if (userData[section].length < 10) {
+            const updatedData = { ...userData };
+            updatedData[section].push({});
+            setUserData(updatedData);
+        } else {
+            alert(`You can only add up to 10 entries.`);
+        }
+    };
+
+    const removeEntry = (section, index) => {
+        const updatedData = { ...userData };
+        updatedData[section].splice(index, 1);
+        setUserData(updatedData);
+    };
+
+    const onNext = (x) => {
+        const updatedData = { ...userData };
+        setStep(x);
+        setUserData(updatedData);
+
+    }
 
     useEffect(() => {
         // Function to fetch data of the candidate from the API
@@ -36,8 +67,7 @@ const AddCandidateForm = () => {
 
 
     const handleCardClick = (id) => {
-        console.log('Clicked on candidate with ID:', id);
-       // const candidate = candidates.find(candidate => candidate.id === id);
+
     };
     const handleAddCandidate = () => {
         window.location.href = '/candidate/new';
@@ -57,7 +87,7 @@ const AddCandidateForm = () => {
             await timeout(1000);
             setUserData("");
             setStep(1);
-            console.log(finalData, "submitted data");
+
         } catch (error) {
             console.error('Error:', error);
         }
@@ -67,12 +97,12 @@ const AddCandidateForm = () => {
 
         switch (step) {
             case 1:
-                console.log(userData, "personal data")
+
                 return (
                     <div>
 
                         <div>
-                            <TextField type="file" accept="image" label='profile' variant="outlined" margin="normal" />
+                            <TextField className="inputFieldPic" type="file" accept="image" label='profile' variant="outlined" margin="normal"  />
                         </div>
                         <div>
                             <TextField label='name' value={userData['name']} onChange={(e) => setUserData({ ...userData, "name": e.target.value })} margin="normal" variant="outlined" />
@@ -93,56 +123,80 @@ const AddCandidateForm = () => {
                     </div>
                 )
             case 2:
-                console.log(userData, "case 2")
+
                 return (
                     <div>
                         <div>
+
                             <div>
-                                <TextField label='institution' value={userData['institution']} onChange={(e) => setUserData({ ...userData, "institution": e.target.value })} variant="outlined" />
-                            </div>
-                            <div>
-                                <TextField label='graduation' value={userData['graduation']} onChange={(e) => setUserData({ ...userData, "graduation": e.target.value })} variant="outlined" />
-                            </div>
-                            <div>
-                                <Button variant="outlined" onClick={() => setStep(1)} color="primary">Back</Button>
-                                <Button variant="outlined" onClick={() => setStep(3)} color="primary">Next</Button>
-                                {/* <Button onClick={addcount} color="primary">Add</Button> */}
+                                {userData.education.map((entry, index) => (
+                                    <div key={index}>
+                                        {/* Education Details Form Fields */}
+                                        <div>
+                                            <TextField label='institution' value={entry['institution'] ? entry['institution'] : ""} onChange={(e) => handleChange('education',e, 'institution', index)} variant="outlined" />
+                                        </div>
+                                        <div>
+                                            <TextField label='graduation' value={entry['graduation'] ? entry['graduation'] : ""} onChange={(e) => handleChange('education',e, 'graduation', index)} variant="outlined" />
+                                        </div>
+                                    </div>
+                                ))}
+                                <Button variant='outlined' color="primary" onClick={() => removeEntry('education')}>Remove</Button>
+                                <Button variant='outlined' color="primary" onClick={() => addEntry('education')}>Add</Button>
+                                <div>
+                                    <Button variant="outlined" onClick={() => setStep(1)} color="primary">Back</Button>
+                                    <Button variant="outlined" onClick={() => onNext(3)} color="primary">Next</Button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 )
             case 3:
-                console.log(userData, "case3")
+
                 return (
                     <div>
-                        <div>
-                            <TextField label='skill' value={userData['skill']} onChange={(e) => setUserData({ ...userData, "skill": e.target.value })} variant="outlined" />
-                        </div>
-                        <div>
-                            <TextField label='experienceInMonths' value={userData['experienceInMonths']} onChange={(e) => setUserData({ ...userData, "experienceInMonths": e.target.value })} variant="outlined" />
-                        </div>
+                        {userData.skills.map((entry,index) => (
+                            <div key={index}>
+                                {/* Skills Form Fields */}
+                                <div>                                                                  
+                                    <TextField label='skill' value={entry['skill']?entry['skill']:""} onChange={(e) => handleChange('skills',e, 'skill',index)} variant="outlined" />
+                                </div>
+                                <div>
+                                    <TextField label='experienceInMonths' value={entry['experienceInMonths']?entry['experienceInMonths']:""} onChange={(e) => handleChange('skills',e, 'experienceInMonths',index)} variant="outlined" />
+                                </div>
+                            </div>
+                        ))}
+                        <Button variant='outlined' color="primary" onClick={() => removeEntry('skills')}>Remove</Button>
+                        <Button variant="outlined" onClick={() => addEntry('skills')} color="primary">Add</Button>
                         <div>
                             <Button variant="outlined" onClick={() => setStep(2)} color="primary">Back</Button>
-                            <Button variant="outlined" onClick={() => setStep(4)} color="primary">Next</Button>
+                            <Button variant="outlined" onClick={() => onNext(4)} color="primary">Next</Button>
                         </div>
                     </div>
                 )
             case 4:
-                console.log(userData, "case 4")
+
                 return (
                     <div>
-                        <div>
-                            <TextField label='company' value={userData['company']} onChange={(e) => setUserData({ ...userData, "company": e.target.value })} variant="outlined" />
-                        </div>
-                        <div>
-                            <TextField label='project' value={userData['project']} onChange={(e) => setUserData({ ...userData, "project": e.target.value })} variant="outlined" />
-                        </div>
-                        <div>
-                            <TextField label='role' value={userData['role']} onChange={(e) => setUserData({ ...userData, "role": e.target.value })} variant="outlined" />
-                        </div>
-                        <div>
-                            <TextField label='duration' value={userData['duration']} onChange={(e) => setUserData({ ...userData, "duration": e.target.value })} variant="outlined" />
-                        </div>
+                        {userData.experience.map((entry,index) => (
+                            <div key={index}>
+                                {/* Experience Form Fields */}
+                                <div>
+                                    <TextField label='company' value={entry['company']?entry['company']:""} onChange={(e) => handleChange('experience',e, "company",index )} variant="outlined" />
+                                </div>
+                                <div>
+                                    <TextField label='project' value={entry['project']?entry['project']:""} onChange={(e) => handleChange('experience',e, "project",index )} variant="outlined" />
+                                </div>
+                                <div>
+                                    <TextField label='role' value={entry['role']?entry['role']:""} onChange={(e) => handleChange('experience',e, "role",index )} variant="outlined" />
+                                </div>
+                                <div>
+                                    <TextField label='duration' value={entry['duration']?entry['duration']:""} onChange={(e) => handleChange('experience',e, "duration",index )} variant="outlined" />
+                                </div>
+
+                            </div>
+                        ))}
+                        <Button variant='outlined' color="primary" onClick={() => removeEntry('experience')}>Remove</Button>
+                        <Button variant='outlined' color="primary" onClick={() => addEntry('experience')}>Add</Button>
                         <div>
                             <Button variant="outlined" onClick={() => setStep(3)} color="primary">Back</Button>
                             <Button variant="outlined" onClick={submitData} color="primary">Submit</Button>
@@ -156,38 +210,30 @@ const AddCandidateForm = () => {
         <div className="container">
             <div className="sectionholder">
                 <div className="left-section">
-
                     <h2 className='listHeader'>List of Candidates</h2>
-
                     {candidates.map(candidate => (
                         <div key={candidate.id} className="card" onClick={() => handleCardClick(candidate.id)}>
                             <h3>{candidate.name}</h3>
-
                         </div>
                     ))}
-
-
                     <button className='add-button' onClick={handleAddCandidate}>Add</button>
-
                 </div>
-
                 <div className="right-section">
                     <h3 style={{ color: "black", textDecoration: 'underline' }}>Enter Your Details</h3>
                     <div className='center-stepper'>
                         <Stepper style={{ width: '30%' }} activeStep={curStep - 1} orientation="horizontal">
                             <Step>
-                                <StepLabel></StepLabel>
+                                <StepLabel> Enter Personal Details</StepLabel>
                             </Step>
                             <Step>
-                                <StepLabel></StepLabel>
+                                <StepLabel>Enter Education Details</StepLabel>
                             </Step>
                             <Step>
-                                <StepLabel></StepLabel>
+                                <StepLabel> Enter your skills</StepLabel>
                             </Step>
                             <Step>
-                                <StepLabel></StepLabel>
+                                <StepLabel> Your Experience</StepLabel>
                             </Step>
-
                         </Stepper>
                     </div>
                     {showStep(curStep)}
