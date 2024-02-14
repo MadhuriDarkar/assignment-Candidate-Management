@@ -3,7 +3,7 @@ import Login from "./components/login";
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from "./components/home";
 import { GoogleLogout } from 'react-google-login';
-import CandidateForm from './Form/CandidateForm';
+import AddCandidateForm from './Form/AddCandidateForm';
 import { useEffect } from 'react';
 import { gapi } from "gapi-script";
 
@@ -21,7 +21,8 @@ function App() {
     gapi.load('client:auth2', start);
   });
   const onSuccess = (res) =>{
-    console.log("logged out successfullt");
+    console.log("logged out successfully");
+    window.location.href = '/login';
 }
 
   return (
@@ -29,7 +30,7 @@ function App() {
       <Router>
         <div>
         <div className='navbar row'>
-        <Link className='homelink' to="/">Home</Link> 
+        <Link  to="/">Home</Link> 
         <GoogleLogout
             className='googleLogoutButton'
               clientId={clientId}
@@ -42,7 +43,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             {/* <Route path="/logout" element={<Logout />} /> */}
-            <Route path='/candidate/new' element={<CandidateForm />} />
+            <Route path='/candidate/new' element={<AddCandidateForm />} />
           </Routes>
         </div>
       </Router >

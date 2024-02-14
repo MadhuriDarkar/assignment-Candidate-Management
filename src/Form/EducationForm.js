@@ -20,12 +20,12 @@ const EducationForm = ({ formData, handleChange, nextStep, prevStep }) => {
     // };
    
     // const handleAddEducation = () => {
-    
-    //     if (formData.length < 10) {
+    //  if (formData.length < 10) {
     //         const newEducation = { institution: '', graduation: '' };
     //         handleChange('education', [...formData, newEducation]);
     //     }
     // };
+    //   
     const handleAddEducation=(e)=>{
     //    setEducationInstitution(e.target.value);
     //    setEducationGraduation();

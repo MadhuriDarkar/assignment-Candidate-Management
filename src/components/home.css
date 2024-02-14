@@ -51,6 +51,7 @@
     /* margin-left: 50%; */
     /* margin-top: 0%; */
     height: 100%;
+    position: relative;
 }
 
 .listHeader {
@@ -72,6 +73,9 @@
     box-shadow: 0 0 10px rgb(94, 126, 199);
     height: 4.5%;
     cursor: pointer;
+}
+.selectedData{
+    margin-top: 3%;
 }
 
 .card {
@@ -110,6 +114,39 @@
 .right-section {
     background-color: #e0e0e0;
     /* Adjust background color as needed */
+}
+/* .header{
+   position: fixed;
+    background-color:  black;
+    height: 4rem;
+   
+} */
+.selectedList{
+    color: white;
+    text-align: center;
+    position: fixed;
+    top: 8%;
+    margin: 0;
+    width: 50%;
+    background-color: #6a6969;
+    left: 49.9%;
+}
+.btn{
+    display: flex;
+    position: fixed;
+    top: 9.9%;
+    left: 53%;
+   
+}
+.editButton{
+    position: absolute;
+    right: 0;
+}
+
+.deleteButton{
+
+    position: absolute;
+    left: 50%;
 }
 table{
     text-align: left;
